@@ -1,0 +1,1730 @@
+# Stack & Queue Problems - Comprehensive Guide
+
+## 1. Stack Using Array
+
+**Problem Idea:** Implement a stack data structure using a fixed-size
+array. A stack follows the LIFO (Last In First Out) principle where the
+last element added is the first one to be removed.
+
+**Solution Approach:** - Create a class with an array, a `topIndex` to
+track the top element's position, and a `capacity` for the array size -
+`push()`: Add element at `++topIndex`. Check for overflow when
+`topIndex >= capacity - 1` - `pop()`: Simply decrease `topIndex`. Check
+for underflow when stack is empty - `top()`: Return element at
+`topIndex` - `isEmpty()`: Check if `topIndex == -1` - `display()`:
+Iterate from `topIndex` down to 0 to show stack from top to bottom
+
+**Key Points:** - Stack overflow occurs when trying to push into a full
+stack - Stack underflow occurs when trying to pop from an empty stack -
+Time complexity: O(1) for all operations
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class StackUsingArray{
+    int arr[10];
+    int topIndex = -1;
+    int capacity = 10;
+
+public:
+    void push(int x){
+        if (topIndex >= capacity - 1){
+            cout << "Stack Overflow" << endl;
+            return;
+        }
+        arr[++topIndex] = x;
+    }
+
+    int top(){
+        if (isEmpty()){
+            cout << "Stack is empty" << endl;
+            return -1;
+        }
+        return arr[topIndex];
+    }
+
+    void pop(){
+        if (isEmpty()){
+            cout << "Stack Underflow" << endl;
+            return;
+        }
+        topIndex--;
+    }
+
+    int size(){
+        return topIndex + 1;
+    }
+
+    bool isEmpty(){
+        return topIndex == -1;
+    }
+
+    void display(){
+        if (isEmpty()){
+            cout << "Stack is empty" << endl;
+            return;
+        }
+
+        cout << "Stack elements (top to bottom): ";
+        for (int i = topIndex; i >= 0; i--){
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main(){
+    StackUsingArray s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    cout << s.top() << endl;
+    s.pop();
+    cout << s.size() << endl;
+    cout << s.isEmpty() << endl;
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 2. Stack Using Linked List
+
+**Problem Idea:** Implement a stack using a dynamic linked list instead
+of a fixed array. This allows unlimited stack size without worrying
+about overflow.
+
+**Solution Approach:** - Create a `Node` structure with `data` and
+`next` pointer - Maintain a `topNode` pointer pointing to the head of
+the linked list - `push()`: Create a new node and insert it at the
+beginning (O(1)) - `pop()`: Remove the node at the beginning - `top()`:
+Return data from `topNode` - Operations are performed at the head for
+constant time complexity
+
+**Key Points:** - Dynamic memory allocation allows unlimited stack
+size - Time complexity: O(1) for all operations - Must use `delete` to
+free memory when popping (prevents memory leaks)
+
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class StackUsingLinkedList{
+    struct Node{
+        int data;
+        Node* next;
+        Node(int val){
+            data = val;
+            next = nullptr;
+        }
+    };
+
+    Node* topNode = nullptr;
+    int currentSize = 0;
+    
+public:
+    void push(int x){
+        Node* newNode = new Node(x);
+        newNode->next = topNode;
+        topNode = newNode;
+        currentSize++;
+    }
+
+    int top(){
+        if (isEmpty()){
+            cout << "Stack is empty" << endl;
+            return -1;
+        }
+        return topNode->data;
+    }
+
+    void pop(){
+        if (isEmpty()){
+            cout << "Stack Underflow" << endl;
+            return;
+        }
+        Node* temp = topNode;
+        topNode = topNode->next;
+        delete temp;
+        currentSize--;
+    }
+
+    int size(){
+        return currentSize;
+    }
+
+    bool isEmpty(){
+        return currentSize == 0;
+    }
+
+    void display(){
+        if (isEmpty()){
+            cout << "Stack is empty" << endl;
+            return;
+        }
+
+        cout << "Stack elements (top to bottom): ";
+        Node* current = topNode;
+        while (current != nullptr){
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
+
+int main(){
+    StackUsingLinkedList s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    cout << s.top() << endl;
+    s.pop();
+    cout << s.size() << endl;
+    cout << s.isEmpty() << endl;
+    s.display();
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 3. Queue Using Array
+
+**Problem Idea:** Implement a queue using a fixed-size array. A queue
+follows the FIFO (First In First Out) principle where the first element
+added is the first one to be removed.
+
+**Solution Approach:** - Use two pointers: `start` (front) and `end`
+(rear) - Initialize both to -1 when empty - `enqueue()`: Add element at
+`end++`. Set `start = 0` on first element - `dequeue()`: Increment
+`start`. Reset both pointers when queue becomes empty - `top()`: Return
+element at `start` position
+
+**Key Points:** - This basic implementation has inefficiency: after many
+dequeue operations, space at the front is wasted - Circular queue solves
+this problem - Time complexity: O(1) for all operations - Space
+complexity: O(n) where n is capacity
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class QueueUsingArray{
+    int start = -1;
+    int end = -1;
+    int capacity = 10;
+    int arr[10];
+
+public:
+    void enqueue(int x){ 
+        if (end == capacity - 1){
+            cout << "Queue Overflow" << endl;
+            return;
+        } else if (isEmpty()){
+            start = 0;
+            end = 0;
+            arr[end] = x; 
+        } else {
+            end++;
+            arr[end] = x;
+        }
+    }
+
+    int top(){
+        if (isEmpty()){
+            cout << "Queue is empty" << endl;
+            return -1;
+        }
+        return arr[start];
+    }
+
+    void dequeue(){
+        if (isEmpty()){
+            cout << "Queue Underflow" << endl;
+        } else if (start == end){
+            start = -1;
+            end = -1;
+        } else {
+            start++;
+        }
+    }
+
+    int size(){
+        return isEmpty() ? 0 : end - start + 1;
+    }
+
+    bool isEmpty(){
+        return start == -1 && end == -1;
+    }
+
+    void display(){
+        if (isEmpty()){
+            cout << "Queue is empty" << endl;
+            return;
+        }
+
+        cout << "Queue elements (front to back): ";
+        for (int i = start; i <= end; i++){
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main(){
+    QueueUsingArray q;
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    cout << q.top() << endl;
+    q.dequeue();
+    cout << q.top() << endl;
+    q.display();
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 4. Queue Using Linked List
+
+**Problem Idea:** Implement a queue using a linked list for dynamic size
+without overflow concerns.
+
+**Solution Approach:** - Use a `Node` structure with `data` and `next`
+pointer - Maintain `topNode` (front of queue) and track size -
+`push()/enqueue()`: Add new node at the beginning - `dequeue()`: Remove
+from front in order (through traversal or maintain tail pointer) - The
+linked list naturally maintains FIFO order
+
+**Key Points:** - For true queue behavior, should maintain both head and
+tail pointers - This implementation needs modification for proper
+dequeue from the rear - Time complexity: O(1) for push, O(n) for proper
+dequeue without tail pointer
+
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class QueueUsingLinkedList{
+    struct Node{
+        int data;
+        Node* next;
+        Node(int val){
+            data = val;
+            next = nullptr;
+        }
+    };
+
+    Node* topNode = nullptr;
+    int currentSize = 0;
+    
+public:
+    void push(int x){
+        Node* newNode = new Node(x);
+        newNode->next = topNode;
+        topNode = newNode;
+        currentSize++;
+    }
+
+    int top(){
+        if (isEmpty()){
+            cout << "Queue is empty" << endl;
+            return -1;
+        }
+        return topNode->data;
+    }
+
+    void dequeue(){
+        if (isEmpty()){
+            cout << "Queue Underflow" << endl;
+            return;
+        }
+        Node* temp = topNode;
+        topNode = topNode->next;
+        delete temp;
+        currentSize--;
+    }
+
+    int size(){
+        return currentSize;
+    }
+
+    bool isEmpty(){
+        return currentSize == 0;
+    }
+
+    void display(){
+        if (isEmpty()){
+            cout << "Queue is empty" << endl;
+            return;
+        }
+
+        cout << "Queue elements (front to back): ";
+        Node* current = topNode;
+        while (current != nullptr){
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
+
+int main(){
+    QueueUsingLinkedList q;
+    q.push(10);
+    q.push(20);
+    q.push(30);
+    cout << q.top() << endl;
+    q.dequeue();
+    cout << q.size() << endl;
+    cout << q.isEmpty() << endl;
+    q.display();
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 5. Circular Queue Using Array
+
+**Problem Idea:** Implement a queue that wraps around to the beginning
+of the array after reaching the end. This solves the space wastage
+problem of linear queue.
+
+**Solution Approach:** - Use modulo arithmetic: `(index + 1) % capacity`
+to wrap around - `start` and `end` pointers that move circularly -
+`isFull()`: Check if `(end + 1) % capacity == start` - `enqueue()`: Add
+at `end = (end + 1) % capacity` - `dequeue()`: Update
+`start = (start + 1) % capacity` - `size()`: Calculate considering
+circular nature
+
+**Key Points:** - Efficiently reuses array space - Distinguishing empty
+vs full is done with the condition `(end + 1) % capacity == start` -
+Modulo operation ensures indices wrap around naturally - Time
+complexity: O(1) for all operations
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class CircularQueue {
+    int arr[10];
+    int start, end, capacity;
+
+public:
+    CircularQueue() {
+        start = -1;
+        end = -1;
+        capacity = 10;
+    }
+
+    bool isEmpty() {
+        return start == -1;
+    }
+
+    bool isFull() {
+        return (end + 1) % capacity == start;
+    }
+
+    void enqueue(int x) {
+        if (isFull()) {
+            cout << "Queue Overflow" << endl;
+            return;
+        }
+        if (isEmpty()) {
+            start = end = 0;
+        } else {
+            end = (end + 1) % capacity;
+        }
+        arr[end] = x;
+    }
+
+    void dequeue() {
+        if (isEmpty()) {
+            cout << "Queue Underflow" << endl;
+            return;
+        }
+        if (start == end) {
+            start = end = -1;
+        } else {
+            start = (start + 1) % capacity;
+        }
+    }
+
+    int front() {
+        if (isEmpty()) {
+            cout << "Queue is empty" << endl;
+            return -1;
+        }
+        return arr[start];
+    }
+
+    int size() {
+        if (isEmpty()) return 0;
+        if (end >= start) return end - start + 1;
+        return capacity - (start - end - 1);
+    }
+
+    void display() {
+        if (isEmpty()) {
+            cout << "Queue is empty" << endl;
+            return;
+        }
+        cout << "Queue elements (front to back): ";
+        int i = start;
+        while (true) {
+            cout << arr[i] << " ";
+            if (i == end) break;
+            i = (i + 1) % capacity;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    CircularQueue q;
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    cout << q.front() << endl;
+    q.dequeue();
+    cout << q.front() << endl;
+    q.display();
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 6. Stack Using Two Queues
+
+**Problem Idea:** Implement a stack using only two queue data
+structures. This demonstrates how different data structures can be
+combined.
+
+**Solution Approach:** - Use two queues: `q1` and `q2` - `push()`: Add
+new element to `q2`, transfer all elements from `q1` to `q2`, then swap
+the queues - `pop()`: Remove from `q1` (which now has the most recent
+element at front) - `top()`: Return front of `q1` - After each push,
+`q1` always contains elements in LIFO order with newest element at front
+
+**Key Points:** - Most expensive operation is `push()` which takes O(n)
+time - `pop()` and `top()` are O(1) - This is not practical compared to
+direct stack implementation but good for learning - Swap operation
+efficiently exchanges the queue contents
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class StackUsingTwoQueues {
+    queue<int> q1, q2;
+
+public:
+    void push(int x) {
+        q2.push(x);
+        while (!q1.empty()) {
+            q2.push(q1.front());
+            q1.pop();
+        }
+        swap(q1, q2);
+    }
+
+    void pop() {
+        if (q1.empty()) {
+            cout << "Stack Underflow" << endl;
+            return;
+        }
+        cout << q1.front() << " popped" << endl;
+        q1.pop();
+    }
+
+    int top() {
+        if (q1.empty()) {
+            cout << "Stack is empty" << endl;
+            return -1;
+        }
+        return q1.front();
+    }
+
+    bool isEmpty() {
+        return q1.empty();
+    }
+
+    void display() {
+        if (q1.empty()) {
+            cout << "Stack is empty" << endl;
+            return;
+        }
+        queue<int> temp = q1;
+        cout << "Stack (top to bottom): ";
+        while (!temp.empty()) {
+            cout << temp.front() << " ";
+            temp.pop();
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    StackUsingTwoQueues st;
+    st.push(10);
+    st.push(20);
+    st.push(30);
+    st.push(40);
+    cout << "Original Stack: ";
+    st.display();
+    st.pop();
+    st.pop();
+    cout << "Stack after two pops: ";
+    st.display();
+    cout << "Top element: " << st.top() << endl;
+    cout << "Is stack empty? " << (st.isEmpty() ? "Yes" : "No") << endl;
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 7. Queue Using Two Stacks
+
+**Problem Idea:** Implement a queue using only two stack data structures
+to show the reverse: converting LIFO into FIFO.
+
+**Solution Approach:** - Use two stacks: `s1` (input stack) and `s2`
+(output stack) - `enqueue()`: Push to `s1` - `dequeue()`: If `s2` is
+empty, transfer all elements from `s1` to `s2` (reverses order), then
+pop from `s2` - The key insight: transferring between stacks reverses
+the order, converting stack's LIFO to queue's FIFO -
+`transferIfNeeded()`: Helper function to manage the transfer operation
+
+**Key Points:** - `enqueue()` is O(1), but `dequeue()` is amortized
+O(1) - Each element is moved at most twice between stacks - Once
+transferred to `s2`, elements maintain queue order (FIFO) - Must handle
+the case when only `s1` has elements
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Stack {
+    int arr[100];
+    int topIndex;
+
+public:
+    Stack() { topIndex = -1; }
+
+    void push(int x) {
+        if (topIndex >= 99) {
+            cout << "Stack Overflow\n";
+            return;
+        }
+        arr[++topIndex] = x;
+    }
+
+    int pop() {
+        if (isEmpty()) {
+            cout << "Stack Underflow\n";
+            return -1;
+        }
+        return arr[topIndex--];
+    }
+
+    int top() {
+        if (isEmpty()) {
+            cout << "Stack is empty\n";
+            return -1;
+        }
+        return arr[topIndex];
+    }
+
+    bool isEmpty() {
+        return topIndex == -1;
+    }
+
+    int size() {
+        return topIndex + 1;
+    }
+
+    int getAt(int index) {
+        if (index < 0 || index > topIndex) return -1;
+        return arr[index];
+    }
+};
+
+class QueueUsingTwoStacks {
+    Stack s1, s2;
+
+    void transferIfNeeded() {
+        if (s2.isEmpty()) {
+            while (!s1.isEmpty()) {
+                s2.push(s1.pop());
+            }
+        }
+    }
+
+public:
+    void enqueue(int x) {
+        s1.push(x);
+    }
+
+    void dequeue() {
+        transferIfNeeded();
+        if (s2.isEmpty()) {
+            cout << "Queue Underflow\n";
+            return;
+        }
+        cout << s2.pop() << " dequeued\n";
+    }
+
+    bool isEmpty() {
+        return s1.isEmpty() && s2.isEmpty();
+    }
+
+    void display() {
+        if (isEmpty()) {
+            cout << "Queue is empty\n";
+            return;
+        }
+        for (int i = s2.size() - 1; i >= 0; i--) {
+            cout << s2.getAt(i) << " ";
+        }
+        for (int i = 0; i < s1.size(); i++) {
+            cout << s1.getAt(i) << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    QueueUsingTwoStacks q;
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    cout << "Queue: ";
+    q.display();
+    q.dequeue();
+    q.dequeue();
+    cout << "Queue after two dequeues: ";
+    q.display();
+    q.enqueue(50);
+    q.enqueue(60);
+    cout << "Queue after enqueues: ";
+    q.display();
+    cout << "Is queue empty? " << (q.isEmpty() ? "Yes" : "No") << endl;
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 8. Infix to Postfix Conversion
+
+**Problem Idea:** Convert an infix expression (normal mathematical
+notation like `a+b`) to postfix notation (like `ab+`). This is useful
+for expression evaluation.
+
+**Solution Approach:** - Use the Shunting-yard algorithm with a stack -
+Scan infix expression left to right - For operands: add directly to
+postfix - For `(`: push to stack - For `)`: pop until matching `(` and
+add to postfix - For operators: pop operators with higher/equal
+precedence to postfix, then push current operator (except `^` is
+right-associative) - At end: pop all remaining operators to postfix
+
+**Key Points:** - Operator precedence: `^` (3) \> `*,/` (2) \> `+,-`
+(1) - Right-associativity of `^` means `2^3^2` = `2^(3^2)`, not
+`(2^3)^2` - Time complexity: O(n) where n is length of expression -
+Postfix is easier to evaluate using a stack
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int precedence(char op) {
+    if(op == '^') return 3;
+    if(op == '*' || op == '/') return 2;
+    if(op == '+' || op == '-') return 1;
+    return 0;
+}
+
+bool isOperator(char c) {
+    return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
+}
+
+string infixToPostfix(string infix) {
+    stack<char> st;
+    string postfix = "";
+
+    for(char c : infix) {
+        if(isalnum(c)) {
+            postfix += c;
+        } else if(c == '(') {
+            st.push(c);
+        } else if(c == ')') {
+            while(!st.empty() && st.top() != '(') {
+                postfix += st.top();
+                st.pop();
+            }
+            st.pop();
+        } else if(isOperator(c)) {
+            while(!st.empty() && precedence(st.top()) >= precedence(c)) {
+                if(c == '^' && st.top() == '^') break;
+                postfix += st.top();
+                st.pop();
+            }
+            st.push(c);
+        }
+    }
+
+    while(!st.empty()) {
+        postfix += st.top();
+        st.pop();
+    }
+
+    return postfix;
+}
+
+int main() {
+    string infix;
+    cout << "Enter infix expression: ";
+    cin >> infix;
+    string postfix = infixToPostfix(infix);
+    cout << "Postfix: " << postfix << endl;
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 9. Infix to Prefix Conversion
+
+**Problem Idea:** Convert infix expression to prefix (like `+ab`). This
+is more complex than postfix conversion.
+
+**Solution Approach:** - Use a clever trick: Reverse the infix string -
+Swap parentheses: `(` becomes `)` and vice versa - Convert reversed
+infix to postfix - Reverse the resulting postfix to get prefix - The
+reversal at both ends converts the algorithm naturally
+
+**Key Points:** - Prefix notation allows right-to-left evaluation -
+Reversing at both steps is the elegant solution (otherwise algorithm is
+more complex) - Example: `a+b*c` → reverse to `c*b+a` → convert →
+postfix → reverse → prefix - Time complexity: O(n)
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isOperator(char c) {
+    return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
+}
+
+int precedence(char op) {
+    if(op == '^') return 3;
+    if(op == '*' || op == '/') return 2;
+    if(op == '+' || op == '-') return 1;
+    return 0;
+}
+
+string infixToPostfix(string infix) {
+    stack<char> st;
+    string postfix = "";
+
+    for(char c : infix) {
+        if(isalnum(c)) {
+            postfix += c;
+        } else if(c == '(') {
+            st.push(c);
+        } else if(c == ')') {
+            while(!st.empty() && st.top() != '(') {
+                postfix += st.top();
+                st.pop();
+            }
+            st.pop();
+        } else if(isOperator(c)) {
+            while(!st.empty() && precedence(st.top()) >= precedence(c)) {
+                if(c == '^' && st.top() == '^') break;
+                postfix += st.top();
+                st.pop();
+            }
+            st.push(c);
+        }
+    }
+
+    while(!st.empty()) {
+        postfix += st.top();
+        st.pop();
+    }
+
+    return postfix;
+}
+
+string infixToPrefix(string infix) {
+    reverse(infix.begin(), infix.end());
+    for(char &c : infix) {
+        if(c == '(') c = ')';
+        else if(c == ')') c = '(';
+    }
+
+    string revPostfix = infixToPostfix(infix);
+    reverse(revPostfix.begin(), revPostfix.end());
+    return revPostfix;
+}
+
+int main() {
+    string infix;
+    cout << "Enter infix expression: ";
+    cin >> infix;
+    string prefix = infixToPrefix(infix);
+    cout << "Prefix: " << prefix << endl;
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 10. Postfix Evaluation
+
+**Problem Idea:** Evaluate a postfix expression and return the result.
+Postfix notation is naturally suited for stack-based evaluation.
+
+**Solution Approach:** - Scan postfix expression left to right - For
+each operand (digit): push to stack - For each operator: pop two
+operands, apply operation, push result back - Order matters: first pop
+is second operand, second pop is first operand - Final result is the
+last element in stack
+
+**Key Points:** - Simple and elegant - no precedence or parentheses to
+worry about - Time complexity: O(n) - Must handle operator precedence
+correctly when applying operations - Works for any valid postfix
+expression
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int postfixEvaluation(string s){
+    stack<int> st;
+    
+    for(int i = 0; i < s.length(); i++){
+        if(s[i] >= '0' && s[i] <= '9'){
+            st.push(s[i] - '0');
+        } else {
+            int n2 = st.top();
+            st.pop();
+            int n1 = st.top();
+            st.pop();
+            
+            if(s[i] == '+') st.push(n1 + n2);
+            else if(s[i] == '-') st.push(n1 - n2);
+            else if(s[i] == '*') st.push(n1 * n2);
+            else if(s[i] == '/') st.push(n1 / n2);
+            else if(s[i] == '^') st.push(pow(n1, n2));
+        }
+    }
+    return st.top();
+}
+
+int main() {
+    string s;
+    cin >> s;
+    cout << postfixEvaluation(s) << endl;
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 11. Prefix Evaluation
+
+**Problem Idea:** Evaluate a prefix expression (like `+ * 2 3 4`) to get
+the result. Prefix notation requires right-to-left scanning.
+
+**Solution Approach:** - Scan prefix expression from **right to left**
+(opposite of postfix) - For each operand: push to stack - For each
+operator: pop two operands (first pop is first operand), apply
+operation, push result - The right-to-left scanning naturally handles
+operator precedence - Final result is the only element in stack
+
+**Key Points:** - Must scan from right to left (opposite of postfix) -
+First popped operand is the first operand for the operation (opposite of
+postfix) - Time complexity: O(n) - Prefix notation is less common but
+used in Lisp and some calculators
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int prefixEvaluation(string s){
+    stack<int> st;
+    
+    for(int i = s.length() - 1; i >= 0; i--){
+        if(s[i] >= '0' && s[i] <= '9'){
+            st.push(s[i] - '0');
+        } else {
+            int n1 = st.top();
+            st.pop();
+            int n2 = st.top();
+            st.pop();
+            
+            if(s[i] == '+') st.push(n1 + n2);
+            else if(s[i] == '-') st.push(n1 - n2);
+            else if(s[i] == '*') st.push(n1 * n2);
+            else if(s[i] == '/') st.push(n1 / n2);
+            else if(s[i] == '^') st.push(pow(n1, n2));
+        }
+    }
+    return st.top();
+}
+
+int main() 
+{
+    string s;
+    cin >> s;
+    cout << prefixEvaluation(s) << endl;
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 12. Reverse Stack Using Recursion
+
+**Problem Idea:** Reverse the entire stack using only recursion and
+without using any extra data structures.
+
+**Solution Approach:** - Use two helper functions: `reverseStack()` and
+`insertAtBottom()` - `reverseStack()`: Pop element, recursively reverse
+remaining stack, then insert popped element at bottom -
+`insertAtBottom()`: Pop elements until stack is empty, push the element,
+then push all popped elements back - The recursion call stack acts as
+the storage mechanism
+
+**Key Points:** - No extra space except recursion call stack - Time
+complexity: O(n²) due to nested recursive calls - Pure recursion
+approach is elegant but not efficient for large stacks - Demonstrates
+power of recursion as implicit data structure
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Stack {
+    vector<int> arr;
+
+public:
+    void push(int x) {
+        arr.push_back(x);
+    }
+
+    int pop() {
+        if (isEmpty()) {
+            cout << "Stack Underflow\n";
+            return -1;
+        }
+        int topElem = arr.back();
+        arr.pop_back();
+        return topElem;
+    }
+
+    bool isEmpty() {
+        return arr.empty();
+    }
+
+    void display() {
+        cout << "Stack (top to bottom): ";
+        for (int i = arr.size() - 1; i >= 0; i--)
+            cout << arr[i] << " ";
+        cout << endl;
+    }
+};
+
+void insertAtBottom(Stack &st, int x) {
+    if (st.isEmpty()) {
+        st.push(x);
+        return;
+    }
+
+    int topx = st.pop();
+    insertAtBottom(st, x);
+    st.push(topx);
+}
+
+void reverseStack(Stack &st) {
+    if (st.isEmpty())
+        return;
+
+    int x = st.pop();
+    reverseStack(st);
+    insertAtBottom(st, x);
+}
+
+int main() {
+    Stack st;
+    st.push(10);
+    st.push(20);
+    st.push(30);
+    st.push(40);
+
+    cout << "Original Stack:\n";
+    st.display();
+
+    reverseStack(st);
+
+    cout << "Reversed Stack:\n";
+    st.display();
+
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 13. Reverse Queue Using Recursion
+
+**Problem Idea:** Reverse a queue using only recursion without extra
+data structures.
+
+**Solution Approach:** - Use `queueReversal()` recursive function - Base
+case: if queue is empty, return - Recursive step: Extract front element,
+recursively reverse remaining queue, then push extracted element at
+rear - The recursion call stack temporarily holds elements, reversing
+their order - After recursion returns, elements are pushed in reversed
+order
+
+**Key Points:** - Queue operations use `front()`, `pop()`, and
+`push()` - Time complexity: O(n) - Space complexity: O(n) due to
+recursion call stack - Elegant demonstration of recursion reversing
+order
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void queueReversal(queue<int> &q) {
+    if (q.empty()) return;
+
+    int temp = q.front();
+    q.pop();
+
+    queueReversal(q);
+
+    q.push(temp);
+}
+
+int main() {
+    queue<int> q;
+
+    q.push(10);
+    q.push(20);
+    q.push(30);
+    q.push(40);
+
+    cout << "Original Queue: ";
+    queue<int> tempQ = q;
+    while (!tempQ.empty()) {
+        cout << tempQ.front() << " ";
+        tempQ.pop();
+    }
+    cout << endl;
+
+    queueReversal(q);
+
+    cout << "Reversed Queue: ";
+    while (!q.empty()) {
+        cout << q.front() << " ";
+        q.pop();
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 14. Sort Stack Using Recursion
+
+**Problem Idea:** Sort a stack in ascending order (top to bottom) using
+only recursion, no extra data structures.
+
+**Solution Approach:** - Use two helper functions: `sortStack()` and
+`insertSorted()` - `sortStack()`: Pop element, recursively sort
+remaining stack, then insert popped element in sorted position -
+`insertSorted()`: Insert element into sorted stack. If stack top is
+smaller or equal, push element. Otherwise pop top recursively, insert
+element, then push top back - Recursion handles both the sorting and the
+insertion logic
+
+**Key Points:** - Time complexity: O(n²) due to nested recursive calls -
+Space complexity: O(n) for recursion stack - Each recursive call does
+insertion work, gradually building sorted stack - Stack condition
+maintained throughout: elements sorted from top to bottom
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void insertSorted(stack<int> &st, int value) {
+    if (st.empty() || st.top() <= value) {
+        st.push(value);
+        return;
+    }
+
+    int topVal = st.top();
+    st.pop();
+    insertSorted(st, value);
+    st.push(topVal);
+}
+
+void sortStack(stack<int> &st) {
+    if (st.empty()) return;
+
+    int topVal = st.top();
+    st.pop();
+    sortStack(st);
+    insertSorted(st, topVal);
+}
+
+int main() {
+    stack<int> s;
+    s.push(34);
+    s.push(3);
+    s.push(31);
+    s.push(98);
+    s.push(92);
+    s.push(23);
+
+    sortStack(s);
+
+    cout << "Sorted stack (Top to Bottom): ";
+    while (!s.empty()) {
+        cout << s.top() << " ";
+        s.pop();
+    }
+    cout << '\n';
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 15. Sort Stack Using Extra Stack
+
+**Problem Idea:** Sort a stack using an additional stack as temporary
+storage. This is iterative and more efficient than recursion.
+
+**Solution Approach:** - Use two stacks: `input` (original) and `temp`
+(temporary/sorted) - While `input` is not empty: pop element from
+`input` - While `temp` is not empty AND top of `temp` \> current
+element: push temp's top to input - Push current element to `temp` -
+After processing all elements, move all from `temp` back to `input` -
+Result: `input` stack is now sorted (top to bottom in ascending order)
+
+**Key Points:** - Time complexity: O(n²) in worst case - Space
+complexity: O(n) for extra stack - More efficient than recursive
+approach (no function call overhead) - Sorted stack has smallest
+elements at bottom, largest at top
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void sortStack(stack<int> &input) {
+    stack<int> temp;
+
+    while (!input.empty()) {
+        int curr = input.top();
+        input.pop();
+
+        while (!temp.empty() && temp.top() > curr) {
+            input.push(temp.top());
+            temp.pop();
+        }
+
+        temp.push(curr);
+    }
+
+    while (!temp.empty()) {
+        input.push(temp.top());
+        temp.pop();
+    }
+}
+
+int main() {
+    stack<int> s;
+    s.push(34);
+    s.push(3);
+    s.push(31);
+    s.push(98);
+    s.push(92);
+    s.push(23);
+
+    sortStack(s);
+
+    cout << "Sorted stack (Top to Bottom): ";
+    while (!s.empty()) {
+        cout << s.top() << " ";
+        s.pop();
+    }
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 16. Sort Queue Using Extra Queue
+
+**Problem Idea:** Sort a queue using selection sort approach with an
+extra queue for temporary storage.
+
+**Solution Approach:** - Use two queues: `input` and extra queue for
+sorting - Perform multiple passes: in each pass, find minimum element in
+remaining unsorted part - `minIndex()`: Finds the position of minimum
+element up to `sortedIndex` - `insertMinToRear()`: Moves minimum element
+to the rear of queue - For each pass, find min and move it to rear.
+After n passes, queue is sorted - Similar to selection sort but adapted
+for queue operations
+
+**Key Points:** - Time complexity: O(n²) - n passes, each finding
+minimum in O(n) - Space complexity: O(n) - Works by repeatedly finding
+and moving minimum to rear - After complete sorting, smallest elements
+are at front
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minIndex(queue<int> &q, int sortedIndex) {
+    int min_index = -1;
+    int min_val = INT_MAX;
+    int n = q.size();
+    
+    for (int i = 0; i < n; i++) {
+        int curr = q.front();
+        q.pop();
+        
+        if (curr <= min_val && i <= sortedIndex) {
+            min_index = i;
+            min_val = curr;
+        }
+        q.push(curr);
+    }
+    return min_index;
+}
+
+void insertMinToRear(queue<int> &q, int min_index) {
+    int min_val;
+    int n = q.size();
+    
+    for (int i = 0; i < n; i++) {
+        int curr = q.front();
+        q.pop();
+        if (i != min_index)
+            q.push(curr);
+        else
+            min_val = curr;
+    }
+    q.push(min_val);
+}
+
+void sortQueue(queue<int> &q) {
+    for (int i = 1; i <= q.size(); i++) {
+        int min_index = minIndex(q, q.size() - i);
+        insertMinToRear(q, min_index);
+    }
+}
+
+int main() {
+    queue<int> q;
+    q.push(3);
+    q.push(1);
+    q.push(4);
+    q.push(2);
+
+    sortQueue(q);
+
+    cout << "Sorted Queue: ";
+    while (!q.empty()) {
+        cout << q.front() << " ";
+        q.pop();
+    }
+    cout << endl;
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 17. Reverse Individual Words Using Stack
+
+**Problem Idea:** Given a string with multiple words, reverse each word
+individually using a stack while keeping words in original order.
+
+**Solution Approach:** - Use a stack to reverse characters - Scan string
+character by character - When non-space character: push to stack - When
+space encountered: pop all characters from stack to form reversed word,
+add space - After loop: pop remaining characters for last word (which
+had no trailing space) - Result: each word reversed but in original
+positions
+
+**Key Points:** - Input: "Hello World" → Output: "olleH dlroW" - Space
+acts as word delimiter - Must handle the last word separately as it has
+no trailing space - Time complexity: O(n) - Useful for word-level string
+manipulation
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void revIndividualWords(string &s){
+    stack<char> st;
+    string result = "";
+    for(int i=0; i<s.size(); i++){
+        if(s[i] != ' '){
+            st.push(s[i]);
+        } else {
+            while(!st.empty()){
+                result += st.top();
+                st.pop();
+            }
+            result += ' ';
+        }
+    }
+
+    while (!st.empty()) {
+        result += st.top();
+        st.pop();
+    }
+
+    s = result;
+}
+
+int main() {
+    string s;
+    getline(cin, s);
+    
+    revIndividualWords(s);
+
+    cout << s << endl;
+
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 18. Middle of Stack (Iterative Approach)
+
+**Problem Idea:** Find the middle element of a stack without modifying
+it permanently.
+
+**Solution Approach:** - Calculate middle index as `n / 2` (0-based, for
+even n gives second middle) - Use temporary stack to move elements - Pop
+`midIndex` elements from original stack to temporary stack - The top of
+original stack is now the middle element - Pop from temporary back to
+original to restore state - Time complexity: O(n)
+
+**Key Points:** - For stack of size n, middle is at position n/2 -
+Temporary stack helps us access middle without permanent modification -
+Restoration step ensures original stack state is maintained - For
+even-sized stacks, returns the second middle element
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int findMiddle(stack<int> st) {
+    int n = st.size();
+    int midIndex = n / 2;
+
+    stack<int> temp;
+    for(int i = 0; i < midIndex; i++) {
+        temp.push(st.top());
+        st.pop();
+    }
+
+    int middle = st.top();
+
+    while(!temp.empty()) {
+        st.push(temp.top());
+        temp.pop();
+    }
+
+    return middle;
+}
+
+int main() {
+    stack<int> st;
+    st.push(10);
+    st.push(20);
+    st.push(30);
+    st.push(40);
+    st.push(50);
+    st.push(60);
+
+    cout << "Middle element: " << findMiddle(st) << endl;
+
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 19. Middle of Stack (Recursive Approach)
+
+**Problem Idea:** Find the middle element of a stack using pure
+recursion.
+
+**Solution Approach:** - `findMiddleRec()` is recursive helper that
+tracks current position - Base case: when `curr == n/2`, return current
+top element - Recursive step: pop element, recurse with incremented
+position, push element back - Recursion call stack keeps track of
+positions and elements - When base case is reached, return that element
+up the recursion chain
+
+**Key Points:** - No extra stack needed (recursion stack serves that
+purpose) - Time complexity: O(n) - Space complexity: O(n) for recursion
+call stack - Stack is automatically restored as recursion unwinds -
+Elegant pure recursion approach
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int findMiddleRec(stack<int> &st, int curr, int n) {
+    if(curr == n / 2) {
+        return st.top();
+    }
+
+    int x = st.top();
+    st.pop();
+    int res = findMiddleRec(st, curr + 1, n);
+    st.push(x);
+    return res;
+}
+
+int findMiddle(stack<int> &st) {
+    int n = st.size();
+    return findMiddleRec(st, 0, n);
+}
+
+int main() {
+    stack<int> st;
+    st.push(10);
+    st.push(20);
+    st.push(30);
+    st.push(40);
+    st.push(50);
+    st.push(60);
+
+    cout << "Middle element: " << findMiddle(st) << endl;
+
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 20. Check Palindrome Using Stack
+
+**Problem Idea:** Check if a string is a palindrome using a stack data
+structure.
+
+**Solution Approach:** - Preprocess string: convert to lowercase, remove
+spaces - Push all characters onto stack - Compare each character of
+processed string with stack top - If all characters match with
+corresponding stack elements, it's palindrome - Stack naturally reverses
+the order for comparison
+
+**Key Points:** - Input: "A man a plan a canal Panama" → Output:
+"Palindrome" (after processing) - Preprocessing removes case sensitivity
+and spaces - Time complexity: O(n) - Stack comparison effectively checks
+if string reads same forwards and backwards - Simpler than traditional
+two-pointer approach
+
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isPalindrome(string s) {
+    stack<char> st;
+    string processed = "";
+
+    for(char c : s) {
+        if(c != ' ') {
+            processed += tolower(c);
+        }
+    }
+
+    for(char c : processed) {
+        st.push(c);
+    }
+
+    for(char c : processed) {
+        if(c != st.top()) {
+            return false;
+        }
+        st.pop();
+    }
+
+    return true;
+}
+
+int main() {
+    string s;
+    cout << "Enter string: ";
+    getline(cin, s);
+
+    if(isPalindrome(s))
+        cout << "Palindrome" << endl;
+    else
+        cout << "Not a palindrome" << endl;
+
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## 21. Balanced Parenthesis Checker
+
+**Problem Idea:** Check if a string containing multiple types of
+brackets is balanced (properly matched and nested).
+
+**Solution Approach:** - Use stack to match opening and closing
+brackets - Scan string left to right - For opening brackets `(`, `{`,
+`[`: push to stack - For closing brackets `)`, `}`, `]`: check if stack
+is empty (unmatched), then check if top matches - If top matches
+corresponding opening bracket, pop. Otherwise, mismatch - At end, stack
+must be empty (all brackets matched)
+
+**Key Points:** - Balanced means: every opening has matching closing,
+proper nesting order - Input examples: - `{[()]}` → Balanced - `{[(])}`
+→ Not balanced (wrong nesting) - `{[}]` → Not balanced (mismatched) -
+Time complexity: O(n) - Common problem in compiler design and expression
+validation
+
+``` cpp
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+bool isBalanced(string str) {
+    stack<char> s;
+
+    for (int i = 0; i < str.size(); i++) {
+        char ch = str[i];
+
+        if (ch == '(' || ch == '{' || ch == '[') {
+            s.push(ch);
+        } 
+        else if (ch == ')' || ch == '}' || ch == ']') {
+            if (s.empty()) {
+                return false;
+            }
+
+            char top = s.top();
+            s.pop();
+
+            if ((ch == ')' && top != '(') ||
+                (ch == '}' && top != '{') ||
+                (ch == ']' && top != '[')) {
+                return false;
+            }
+        }
+    }
+
+    return s.empty();
+}
+
+int main() {
+    string str;
+    cout << "Enter a string with brackets: ";
+    cin >> str;
+
+    if (isBalanced(str)) {
+        cout << "Balanced" << endl;
+    } else {
+        cout << "Not Balanced" << endl;
+    }
+
+    return 0;
+}
+```
+
+------------------------------------------------------------------------
+
+## Summary Table
+
+  --------------------------------------------------------------------------------
+  Problem       Data Structure  Time Complexity  Space Complexity  Key Concept
+  ------------- --------------- ---------------- ----------------- ---------------
+  Stack Array   Stack           O(1)             O(n)              Fixed size,
+                                                                   simple
+
+  Stack         Stack           O(1)             O(n)              Dynamic size
+  LinkedList                                                       
+
+  Queue Array   Queue           O(1)             O(n)              Linear, space
+                                                                   waste
+
+  Queue         Queue           O(1)/O(n)        O(n)              Dynamic
+  LinkedList                                                       
+
+  Circular      Queue           O(1)             O(n)              Modulo
+  Queue                                                            wraparound
+
+  Stack Two     Stack           O(n)             O(n)              Convert
+  Queues                                                           FIFO→LIFO
+
+  Queue Two     Queue           O(1) amortized   O(n)              Convert
+  Stacks                                                           LIFO→FIFO
+
+  Infix to      Stack           O(n)             O(n)              Shunting-yard
+  Postfix                                                          algorithm
+
+  Infix to      Stack           O(n)             O(n)              Reverse method
+  Prefix                                                           
+
+  Postfix       Stack           O(n)             O(n)              Direct
+  Evaluation                                                       evaluation
+
+  Prefix        Stack           O(n)             O(n)              Right-to-left
+  Evaluation                                                       scan
+
+  Reverse Stack Recursion       O(n²)            O(n)              Pure recursion
+
+  Reverse Queue Recursion       O(n)             O(n)              Recursion depth
+
+  Sort Stack    Stack           O(n²)            O(n)              Insertion +
+  Recursion                                                        sort
+
+  Sort Stack    Stack           O(n²)            O(n)              Selection
+  Extra                                                            approach
+
+  Sort Queue    Queue           O(n²)            O(n)              Find min
+                                                                   repeatedly
+
+  Reverse Words Stack           O(n)             O(n)              Per-word
+                                                                   reversal
+
+  Middle Stack  Stack           O(n)             O(n)              Temp stack
+  Iterative                                                        
+
+  Middle Stack  Recursion       O(n)             O(n)              Recursion
+  Recursive                                                        tracking
+
+  Palindrome    Stack           O(n)             O(n)              Character
+  Check                                                            comparison
+
+  Balanced      Stack           O(n)             O(n)              Bracket
+  Parenthesis                                                      matching
+  --------------------------------------------------------------------------------
