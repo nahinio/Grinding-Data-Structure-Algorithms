@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>nahinio cheetsheet.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="basic-template--fast-io">BASIC TEMPLATE &amp; FAST I/O</h2>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ll long long</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> pb push_back</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> mp make_pair</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> all(x) (x).begin(), (x).end()</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> F first</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> S second</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> sz(x) (int)(x).size()</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    ios_base::sync_with_stdio(<span class="hljs-literal">false</span>);
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-literal">NULL</span>);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</div></code></pre>
+<hr>
+<h2 id="stl-containers">STL CONTAINERS</h2>
+<h3 id="1-vector-dynamic-array">1. <strong>VECTOR</strong> (Dynamic Array)</h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v;              <span class="hljs-comment">// Declaration</span>
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">v</span><span class="hljs-params">(n)</span></span>;           <span class="hljs-comment">// Size n, all 0</span>
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">v</span><span class="hljs-params">(n, <span class="hljs-number">5</span>)</span></span>;        <span class="hljs-comment">// Size n, all 5</span>
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; v2d;    <span class="hljs-comment">// 2D vector</span>
+</div></code></pre>
+<p><strong>Key Functions:</strong></p>
+<ul>
+<li><code>v.push_back(x)</code> - Add element at end | O(1)</li>
+<li><code>v.pop_back()</code> - Remove last element | O(1)</li>
+<li><code>v.size()</code> - Return size | O(1)</li>
+<li><code>v.empty()</code> - Check if empty | O(1)</li>
+<li><code>v.clear()</code> - Remove all elements | O(n)</li>
+<li><code>v[i]</code> or <code>v.at(i)</code> - Access element | O(1)</li>
+<li><code>v.front()</code> - First element | O(1)</li>
+<li><code>v.back()</code> - Last element | O(1)</li>
+<li><code>v.insert(v.begin()+i, x)</code> - Insert at position | O(n)</li>
+<li><code>v.erase(v.begin()+i)</code> - Delete at position | O(n)</li>
+<li><code>v.resize(n)</code> - Change size | O(n)</li>
+</ul>
+<h3 id="2-set-ordered-unique-elements">2. <strong>SET</strong> (Ordered, Unique Elements)</h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; s;                 <span class="hljs-comment">// Sorted, no duplicates</span>
+<span class="hljs-built_in">multiset</span>&lt;<span class="hljs-keyword">int</span>&gt; ms;           <span class="hljs-comment">// Sorted, allows duplicates</span>
+<span class="hljs-built_in">unordered_set</span>&lt;<span class="hljs-keyword">int</span>&gt; us;      <span class="hljs-comment">// No order, no duplicates, O(1) avg</span>
+</div></code></pre>
+<p><strong>Key Functions:</strong></p>
+<ul>
+<li><code>s.insert(x)</code> - Add element | O(log n)</li>
+<li><code>s.erase(x)</code> - Remove element | O(log n)</li>
+<li><code>s.find(x)</code> - Find element (returns iterator) | O(log n)</li>
+<li><code>s.count(x)</code> - Check if exists (0 or 1) | O(log n)</li>
+<li><code>s.size()</code> - Return size | O(1)</li>
+<li><code>s.clear()</code> - Remove all | O(n)</li>
+<li><code>s.lower_bound(x)</code> - First element ≥ x | O(log n)</li>
+<li><code>s.upper_bound(x)</code> - First element &gt; x | O(log n)</li>
+<li><code>*s.begin()</code> - Minimum element | O(1)</li>
+<li><code>*s.rbegin()</code> - Maximum element | O(1)</li>
+</ul>
+<p><strong>When to use:</strong></p>
+<ul>
+<li>Need sorted unique elements</li>
+<li>Fast insertion/deletion with ordering</li>
+<li>Range queries (lower_bound/upper_bound)</li>
+</ul>
+<h3 id="3-map-key-value-pairs">3. <strong>MAP</strong> (Key-Value Pairs)</h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; m;            <span class="hljs-comment">// Sorted by key</span>
+<span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; um; <span class="hljs-comment">// No order, O(1) avg access</span>
+</div></code></pre>
+<p><strong>Key Functions:</strong></p>
+<ul>
+<li><code>m[key] = value</code> - Insert/update | O(log n)</li>
+<li><code>m.insert({key, value})</code> - Insert pair | O(log n)</li>
+<li><code>m.erase(key)</code> - Remove key | O(log n)</li>
+<li><code>m.find(key)</code> - Find key (returns iterator) | O(log n)</li>
+<li><code>m.count(key)</code> - Check if key exists | O(log n)</li>
+<li><code>m.size()</code> - Return size | O(1)</li>
+<li><code>m.clear()</code> - Remove all | O(n)</li>
+</ul>
+<p><strong>Iteration:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> it : m) {
+    <span class="hljs-built_in">cout</span> &lt;&lt; it.first &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; it.second &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</div></code></pre>
+<p><strong>When to use:</strong></p>
+<ul>
+<li>Frequency counting</li>
+<li>Mapping relationships</li>
+<li>Coordinate compression</li>
+</ul>
+<h3 id="4-queue-fifo">4. <strong>QUEUE</strong> (FIFO)</h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">queue</span>&lt;<span class="hljs-keyword">int</span>&gt; q;
+</div></code></pre>
+<p><strong>Key Functions:</strong></p>
+<ul>
+<li><code>q.push(x)</code> - Add to back | O(1)</li>
+<li><code>q.pop()</code> - Remove from front | O(1)</li>
+<li><code>q.front()</code> - Access front element | O(1)</li>
+<li><code>q.back()</code> - Access back element | O(1)</li>
+<li><code>q.size()</code> - Return size | O(1)</li>
+<li><code>q.empty()</code> - Check if empty | O(1)</li>
+</ul>
+<p><strong>When to use:</strong> BFS, level-order traversal</p>
+<h3 id="5-stack-lifo">5. <strong>STACK</strong> (LIFO)</h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">int</span>&gt; st;
+</div></code></pre>
+<p><strong>Key Functions:</strong></p>
+<ul>
+<li><code>st.push(x)</code> - Add to top | O(1)</li>
+<li><code>st.pop()</code> - Remove from top | O(1)</li>
+<li><code>st.top()</code> - Access top element | O(1)</li>
+<li><code>st.size()</code> - Return size | O(1)</li>
+<li><code>st.empty()</code> - Check if empty | O(1)</li>
+</ul>
+<p><strong>When to use:</strong> DFS, parentheses matching, expression evaluation</p>
+<h3 id="6-deque-double-ended-queue">6. <strong>DEQUE</strong> (Double-ended Queue)</h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">deque</span>&lt;<span class="hljs-keyword">int</span>&gt; dq;
+</div></code></pre>
+<p><strong>Key Functions:</strong></p>
+<ul>
+<li><code>dq.push_back(x)</code> - Add to back | O(1)</li>
+<li><code>dq.push_front(x)</code> - Add to front | O(1)</li>
+<li><code>dq.pop_back()</code> - Remove from back | O(1)</li>
+<li><code>dq.pop_front()</code> - Remove from front | O(1)</li>
+<li><code>dq.front()</code> - Access front | O(1)</li>
+<li><code>dq.back()</code> - Access back | O(1)</li>
+<li><code>dq[i]</code> - Random access | O(1)</li>
+</ul>
+<p><strong>When to use:</strong> Sliding window problems</p>
+<h3 id="7-priority-queue-heap">7. <strong>PRIORITY QUEUE</strong> (Heap)</h3>
+<pre class="hljs"><code><div>priority_queue&lt;<span class="hljs-keyword">int</span>&gt; pq;              <span class="hljs-comment">// Max heap</span>
+priority_queue&lt;<span class="hljs-keyword">int</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;, greater&lt;<span class="hljs-keyword">int</span>&gt;&gt; pq; <span class="hljs-comment">// Min heap</span>
+</div></code></pre>
+<p><strong>Key Functions:</strong></p>
+<ul>
+<li><code>pq.push(x)</code> - Insert element | O(log n)</li>
+<li><code>pq.pop()</code> - Remove top | O(log n)</li>
+<li><code>pq.top()</code> - Access top (max/min) | O(1)</li>
+<li><code>pq.size()</code> - Return size | O(1)</li>
+<li><code>pq.empty()</code> - Check if empty | O(1)</li>
+</ul>
+<p><strong>When to use:</strong> Dijkstra, greedy problems, k-th largest</p>
+<h3 id="8-pair">8. <strong>PAIR</strong></h3>
+<pre class="hljs"><code><div>pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; p = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>};
+pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; p = make_pair(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);
+</div></code></pre>
+<p><strong>Access:</strong> <code>p.first</code>, <code>p.second</code>
+<strong>Auto sorting:</strong> First by first element, then by second</p>
+<hr>
+<h2 id="%F0%9F%94%A7-important-algorithms">🔧 IMPORTANT ALGORITHMS</h2>
+<h3 id="1-sorting">1. <strong>SORTING</strong></h3>
+<pre class="hljs"><code><div>sort(v.begin(), v.end());              <span class="hljs-comment">// Ascending</span>
+sort(v.begin(), v.end(), greater&lt;<span class="hljs-keyword">int</span>&gt;()); <span class="hljs-comment">// Descending</span>
+sort(arr, arr+n);                      <span class="hljs-comment">// Array sorting</span>
+
+<span class="hljs-comment">// Custom comparator</span>
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> a &gt; b; }
+sort(v.begin(), v.end(), cmp);
+
+
+<span class="hljs-comment">// Sort pairs by second element</span>
+sort(v.begin(), v.end(), [](pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt; a, pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt; b) {
+    <span class="hljs-keyword">return</span> a.second &lt; b.second;
+});
+
+</div></code></pre>
+<p><strong>Time:</strong> O(n log n)</p>
+<h3 id="2-binary-search">2. <strong>BINARY SEARCH</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// On sorted array/vector</span>
+<span class="hljs-keyword">bool</span> found = binary_search(v.begin(), v.end(), x); <span class="hljs-comment">// Returns true/false</span>
+
+<span class="hljs-comment">// Lower bound: first element &gt;= x</span>
+<span class="hljs-keyword">auto</span> it = lower_bound(v.begin(), v.end(), x);
+<span class="hljs-keyword">int</span> pos = it - v.begin();
+
+<span class="hljs-comment">// Upper bound: first element &gt; x</span>
+<span class="hljs-keyword">auto</span> it = upper_bound(v.begin(), v.end(), x);
+
+<span class="hljs-comment">// Count occurrences</span>
+<span class="hljs-keyword">int</span> cnt = upper_bound(all(v), x) - lower_bound(all(v), x);
+
+<span class="hljs-comment">// Manual binary search</span>
+<span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>, r = n<span class="hljs-number">-1</span>, ans = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">while</span>(l &lt;= r) {
+    <span class="hljs-keyword">int</span> mid = l + (r-l)/<span class="hljs-number">2</span>;
+    <span class="hljs-keyword">if</span>(check(mid)) {
+        ans = mid;
+        r = mid - <span class="hljs-number">1</span>;  <span class="hljs-comment">// or l = mid + 1</span>
+    } <span class="hljs-keyword">else</span> {
+        l = mid + <span class="hljs-number">1</span>;  <span class="hljs-comment">// or r = mid - 1</span>
+    }
+}
+
+</div></code></pre>
+<p><strong>Time:</strong> O(log n)</p>
+<h3 id="3-reverse">3. <strong>REVERSE</strong></h3>
+<pre class="hljs"><code><div>reverse(v.begin(), v.end());
+reverse(s.begin(), s.end());  <span class="hljs-comment">// String</span>
+</div></code></pre>
+<h3 id="4-minmax-element">4. <strong>MIN/MAX ELEMENT</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> minVal = *min_element(v.begin(), v.end());
+<span class="hljs-keyword">int</span> maxVal = *max_element(v.begin(), v.end());
+
+
+<span class="hljs-comment">// Index of min/max</span>
+<span class="hljs-keyword">int</span> minIdx = min_element(v.begin(), v.end()) - v.begin();
+</div></code></pre>
+<h3 id="5-accumulate-sum">5. <strong>ACCUMULATE (Sum)</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> sum = accumulate(v.begin(), v.end(), <span class="hljs-number">0</span>);
+ll sum = accumulate(v.begin(), v.end(), <span class="hljs-number">0L</span>L); <span class="hljs-comment">// For long long</span>
+</div></code></pre>
+<h3 id="6-unique-remove-duplicates">6. <strong>UNIQUE</strong> (Remove Duplicates)</h3>
+<pre class="hljs"><code><div>sort(v.begin(), v.end());
+v.erase(unique(v.begin(), v.end()), v.end());
+</div></code></pre>
+<h3 id="7-nextprev-permutation">7. <strong>NEXT/PREV PERMUTATION</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};
+<span class="hljs-keyword">do</span> {
+    <span class="hljs-comment">// Process permutation</span>
+} <span class="hljs-keyword">while</span>(next_permutation(v.begin(), v.end()));
+
+</div></code></pre>
+<h3 id="8-count">8. <strong>COUNT</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> cnt = count(v.begin(), v.end(), x); <span class="hljs-comment">// Count occurrences of x</span>
+</div></code></pre>
+<h3 id="9-fill">9. <strong>FILL</strong></h3>
+<pre class="hljs"><code><div>fill(arr, arr+n, <span class="hljs-number">0</span>);           <span class="hljs-comment">// Fill array</span>
+fill(v.begin(), v.end(), <span class="hljs-number">-1</span>);  <span class="hljs-comment">// Fill vector</span>
+</div></code></pre>
+<h3 id="10-swap">10. <strong>SWAP</strong></h3>
+<pre class="hljs"><code><div>swap(a, b);
+swap(v[i], v[j]);
+</div></code></pre>
+<hr>
+<h2 id="number-theory">NUMBER THEORY</h2>
+<h3 id="1-gcd--lcm">1. <strong>GCD &amp; LCM</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{
+    <span class="hljs-keyword">return</span> b == <span class="hljs-number">0</span> ? a : gcd(b, a % b);
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lcm</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{
+    <span class="hljs-keyword">return</span> (a / gcd(a, b)) * b;  <span class="hljs-comment">// Avoid overflow</span>
+}
+
+
+<span class="hljs-comment">// Built-in (C++17)</span>
+<span class="hljs-keyword">int</span> g = __gcd(a, b);
+</div></code></pre>
+<h3 id="2-prime-check">2. <strong>PRIME CHECK</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isPrime</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">if</span>(n &lt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">if</span>(n &lt;= <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">if</span>(n % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> || n % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">5</span>; i * i &lt;= n; i += <span class="hljs-number">6</span>) {
+        <span class="hljs-keyword">if</span>(n % i == <span class="hljs-number">0</span> || n % (i + <span class="hljs-number">2</span>) == <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+</div></code></pre>
+<p><strong>Time:</strong> O(√n)</p>
+<h3 id="3-sieve-of-eratosthenes-all-primes-up-to-n">3. <strong>SIEVE OF ERATOSTHENES</strong> (All primes up to n)</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt; <span class="hljs-title">sieve</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt; <span class="hljs-title">prime</span><span class="hljs-params">(n+<span class="hljs-number">1</span>, <span class="hljs-literal">true</span>)</span></span>;
+    prime[<span class="hljs-number">0</span>] = prime[<span class="hljs-number">1</span>] = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i * i &lt;= n; i++) {
+        <span class="hljs-keyword">if</span>(prime[i]) {
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = i*i; j &lt;= n; j += i)
+                prime[j] = <span class="hljs-literal">false</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> prime;
+}
+
+</div></code></pre>
+<p><strong>Time:</strong> O(n log n)</p>
+<h3 id="4-prime-factorization">4. <strong>PRIME FACTORIZATION</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">primeFactors</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; factors;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i * i &lt;= n; i++) {
+        <span class="hljs-keyword">while</span>(n % i == <span class="hljs-number">0</span>) {
+            factors.push_back(i);
+            n /= i;
+        }
+    }
+    <span class="hljs-keyword">if</span>(n &gt; <span class="hljs-number">1</span>) factors.push_back(n);
+    <span class="hljs-keyword">return</span> factors;
+}
+
+</div></code></pre>
+<h3 id="5-count-divisors">5. <strong>COUNT DIVISORS</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">countDivisors</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i * i &lt;= n; i++) {
+        <span class="hljs-keyword">if</span>(n % i == <span class="hljs-number">0</span>) {
+            cnt++;
+            <span class="hljs-keyword">if</span>(i != n/i) cnt++;
+        }
+    }
+    <span class="hljs-keyword">return</span> cnt;
+}
+
+</div></code></pre>
+<h3 id="6-modular-arithmetic">6. <strong>MODULAR ARITHMETIC</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;
+
+<span class="hljs-comment">// Modular addition</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> (a + b) % MOD; }
+
+<span class="hljs-comment">// Modular multiplication</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">mul</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> (<span class="hljs-number">1L</span>L * a * b) % MOD; }
+
+<span class="hljs-comment">// Modular power</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">power</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{
+    <span class="hljs-keyword">int</span> res = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span>(b &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">if</span>(b &amp; <span class="hljs-number">1</span>) res = mul(res, a);
+        a = mul(a, a);
+        b &gt;&gt;= <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> res;
+}
+
+<span class="hljs-comment">// Modular inverse (when MOD is prime)</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">modInv</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>{ <span class="hljs-keyword">return</span> power(a, MOD - <span class="hljs-number">2</span>); }
+
+<span class="hljs-comment">// Modular division</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">divide</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> mul(a, modInv(b)); }
+</div></code></pre>
+<h3 id="7-factorial">7. <strong>FACTORIAL</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-function">ll <span class="hljs-title">factorial</span><span class="hljs-params">(ll n)</span> </span>{
+    ll ans = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; i++) {
+        ans = (ans * i) % mod;
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    ll n;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    <span class="hljs-built_in">cout</span> &lt;&lt; factorial(n) &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</div></code></pre>
+<h3 id="8-factorial--ncr">8. <strong>FACTORIAL &amp; nCr</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ll long long</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">1e6</span> + <span class="hljs-number">5</span>;
+<span class="hljs-keyword">const</span> ll mod = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;
+
+ll fact[MAXN], invFact[MAXN];
+
+<span class="hljs-comment">// (a * b) % mod</span>
+<span class="hljs-function">ll <span class="hljs-title">mul</span><span class="hljs-params">(ll a, ll b)</span> </span>{
+    <span class="hljs-keyword">return</span> (a % mod) * (b % mod) % mod;
+}
+
+<span class="hljs-comment">// Binary exponentiation</span>
+<span class="hljs-function">ll <span class="hljs-title">binpow</span><span class="hljs-params">(ll a, ll p)</span> </span>{
+    ll r = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> (p) {
+        <span class="hljs-keyword">if</span> (p &amp; <span class="hljs-number">1</span>) r = mul(r, a);
+        a = mul(a, a);
+        p &gt;&gt;= <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> r;
+}
+
+<span class="hljs-comment">// Modular inverse using Fermat's little theorem (mod must be prime)</span>
+<span class="hljs-function">ll <span class="hljs-title">modInv</span><span class="hljs-params">(ll x)</span> </span>{
+    <span class="hljs-keyword">return</span> binpow(x, mod - <span class="hljs-number">2</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">precompute</span><span class="hljs-params">()</span> </span>{
+    fact[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; MAXN; i++)
+        fact[i] = mul(fact[i - <span class="hljs-number">1</span>], i);
+
+    invFact[MAXN - <span class="hljs-number">1</span>] = modInv(fact[MAXN - <span class="hljs-number">1</span>]);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = MAXN - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--)
+        invFact[i] = mul(invFact[i + <span class="hljs-number">1</span>], i + <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-function">ll <span class="hljs-title">nCr</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> r)</span> </span>{
+    <span class="hljs-keyword">if</span> (r &lt; <span class="hljs-number">0</span> || r &gt; n) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> mul(fact[n], mul(invFact[r], invFact[n - r]));
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    ios::sync_with_stdio(<span class="hljs-literal">false</span>);
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-literal">NULL</span>);
+
+    precompute();
+
+    <span class="hljs-comment">// Example usage:</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; nCr(<span class="hljs-number">5</span>, <span class="hljs-number">2</span>) &lt;&lt; <span class="hljs-string">"\n"</span>;  <span class="hljs-comment">// Output = 10</span>
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+
+</div></code></pre>
+<hr>
+<h2 id="problem-solving-techniques">PROBLEM SOLVING TECHNIQUES</h2>
+<h3 id="1-prefix-sum">1. <strong>PREFIX SUM</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// 1D Prefix Sum</span>
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">prefix</span><span class="hljs-params">(n+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) {
+    prefix[i] = prefix[i<span class="hljs-number">-1</span>] + arr[i<span class="hljs-number">-1</span>];
+}
+<span class="hljs-comment">// Sum of [l, r] = prefix[r+1] - prefix[l]</span>
+
+<span class="hljs-comment">// 2D Prefix Sum</span>
+prefix[i][j] = arr[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>] + prefix[i<span class="hljs-number">-1</span>][j] + prefix[i][j<span class="hljs-number">-1</span>] - prefix[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>];
+<span class="hljs-comment">// Sum of rectangle = prefix[r2][c2] - prefix[r1-1][c2] - prefix[r2][c1-1] + prefix[r1-1][c1-1]</span>
+
+</div></code></pre>
+<h3 id="2-two-pointers">2. <strong>TWO POINTERS</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Example: Find pair with sum = target</span>
+<span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>, r = n<span class="hljs-number">-1</span>;
+<span class="hljs-keyword">while</span>(l &lt; r) {
+    <span class="hljs-keyword">int</span> sum = arr[l] + arr[r];
+    <span class="hljs-keyword">if</span>(sum == target) {
+        <span class="hljs-comment">// Found</span>
+        <span class="hljs-keyword">break</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(sum &lt; target) {
+        l++;
+    } <span class="hljs-keyword">else</span> {
+        r--;
+    }
+}
+
+</div></code></pre>
+<h3 id="3-sliding-window">3. <strong>SLIDING WINDOW</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Maximum sum subarray of size k</span>
+<span class="hljs-keyword">int</span> maxSum = <span class="hljs-number">0</span>, windowSum = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; k; i++) windowSum += arr[i];
+maxSum = windowSum;
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = k; i &lt; n; i++) {
+    windowSum += arr[i] - arr[i-k];
+    maxSum = max(maxSum, windowSum);
+}
+
+</div></code></pre>
+<h3 id="4-frequency-counting">4. <strong>FREQUENCY COUNTING</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; freq;
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x : v) freq[x]++;
+
+<span class="hljs-comment">// Or using array (when values are small)</span>
+<span class="hljs-keyword">int</span> freq[<span class="hljs-number">100005</span>] = {<span class="hljs-number">0</span>};
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x : v) freq[x]++;
+</div></code></pre>
+<h3 id="5-difference-array-range-updates">5. <strong>DIFFERENCE ARRAY</strong> (Range Updates)</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Update [l, r] by x</span>
+diff[l] += x;
+diff[r+<span class="hljs-number">1</span>] -= x;
+
+<span class="hljs-comment">// Build actual array</span>
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++) 
+    diff[i] += diff[i<span class="hljs-number">-1</span>];
+</div></code></pre>
+<h3 id="6-kadanes-algorithm-max-subarray-sum">6. <strong>KADANE'S ALGORITHM</strong> (Max Subarray Sum)</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> maxSum = arr[<span class="hljs-number">0</span>], currSum = arr[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++) {
+    currSum = max(arr[i], currSum + arr[i]);
+    maxSum = max(maxSum, currSum);
+}
+
+</div></code></pre>
+<h3 id="7-binary-search-on-answer">7. <strong>BINARY SEARCH ON ANSWER</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Find minimum x such that check(x) is true</span>
+<span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>, r = <span class="hljs-number">1e9</span>, ans = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">while</span>(l &lt;= r) {
+    <span class="hljs-keyword">int</span> mid = l + (r-l)/<span class="hljs-number">2</span>;
+    <span class="hljs-keyword">if</span>(check(mid)) {
+        ans = mid;
+        r = mid - <span class="hljs-number">1</span>;  <span class="hljs-comment">// Try smaller</span>
+    } <span class="hljs-keyword">else</span> {
+        l = mid + <span class="hljs-number">1</span>;
+    }
+}
+
+</div></code></pre>
+<h3 id="8-greedy-common-patterns">8. <strong>GREEDY</strong> (Common Patterns)</h3>
+<ul>
+<li>Sort and process</li>
+<li>Always pick min/max</li>
+<li>Exchange argument</li>
+<li>Optimal substructure</li>
+</ul>
+<hr>
+<h2 id="math-formulas--tricks">MATH FORMULAS &amp; TRICKS</h2>
+<h3 id="1-arithmetic-progression">1. <strong>ARITHMETIC PROGRESSION</strong></h3>
+<pre class="hljs"><code><div>Sum = n/2 * (2a + (n-1)d)
+Sum = n/2 * (first + last)
+nth term = a + (n-1)d
+</div></code></pre>
+<h3 id="2-geometric-progression">2. <strong>GEOMETRIC PROGRESSION</strong></h3>
+<pre class="hljs"><code><div>Sum = a * (r^n - 1) / (r - 1)
+Infinite sum (|r| &lt; 1) = a / (1 - r)
+</div></code></pre>
+<h3 id="3-sum-formulas">3. <strong>SUM FORMULAS</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Sum of first n natural numbers</span>
+sum = n * (n + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>
+
+<span class="hljs-comment">// Sum of squares</span>
+sum = n * (n + <span class="hljs-number">1</span>) * (<span class="hljs-number">2</span>n + <span class="hljs-number">1</span>) / <span class="hljs-number">6</span>
+
+<span class="hljs-comment">// Sum of cubes</span>
+sum = (n * (n + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>)^<span class="hljs-number">2</span>
+</div></code></pre>
+<h3 id="4-fast-exponentiation">4. <strong>FAST EXPONENTIATION</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-function">ll <span class="hljs-title">power</span><span class="hljs-params">(ll a, ll b)</span> </span>{
+    ll res = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span>(b &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">if</span>(b &amp; <span class="hljs-number">1</span>) res *= a;
+        a *= a;
+        b &gt;&gt;= <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> res;
+}
+
+</div></code></pre>
+<h3 id="5-digit-sum">5. <strong>DIGIT SUM</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">digitSum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(n &gt; <span class="hljs-number">0</span>) {
+        sum += n % <span class="hljs-number">10</span>;
+        n /= <span class="hljs-number">10</span>;
+    }
+    <span class="hljs-keyword">return</span> sum;
+}
+
+</div></code></pre>
+<h3 id="6-trailing-zeros-in-factorial">6. <strong>TRAILING ZEROS IN FACTORIAL</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">trailingZeros</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">5</span>; n/i &gt; <span class="hljs-number">0</span>; i *= <span class="hljs-number">5</span>)
+        cnt += n/i;
+    <span class="hljs-keyword">return</span> cnt;
+}
+
+</div></code></pre>
+<h3 id="7-number-of-digits">7. <strong>NUMBER OF DIGITS</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> digits = <span class="hljs-built_in">floor</span>(<span class="hljs-built_in">log10</span>(n)) + <span class="hljs-number">1</span>;
+<span class="hljs-comment">// Or: to_string(n).length()</span>
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%8E%AF-bit-manipulation">🎯 BIT MANIPULATION</h2>
+<h3 id="basic-operations"><strong>Basic Operations</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Check if i-th bit is set</span>
+<span class="hljs-keyword">bool</span> isSet = (n &gt;&gt; i) &amp; <span class="hljs-number">1</span>;
+<span class="hljs-keyword">bool</span> isSet = (n &amp; (<span class="hljs-number">1</span> &lt;&lt; i)) != <span class="hljs-number">0</span>;
+
+
+<span class="hljs-comment">// Set i-th bit</span>
+n |= (<span class="hljs-number">1</span> &lt;&lt; i);
+
+
+<span class="hljs-comment">// Clear i-th bit</span>
+n &amp;= ~(<span class="hljs-number">1</span> &lt;&lt; i);
+
+<span class="hljs-comment">// Toggle i-th bit</span>
+n ^= (<span class="hljs-number">1</span> &lt;&lt; i);
+
+<span class="hljs-comment">// Count set bits</span>
+<span class="hljs-keyword">int</span> cnt = __builtin_popcount(n);      <span class="hljs-comment">// int</span>
+<span class="hljs-keyword">int</span> cnt = __builtin_popcountll(n);    <span class="hljs-comment">// long long</span>
+
+<span class="hljs-comment">// Lowest set bit</span>
+<span class="hljs-keyword">int</span> lowBit = n &amp; (-n);
+
+<span class="hljs-comment">// Check if power of 2</span>
+<span class="hljs-keyword">bool</span> isPower2 = (n &gt; <span class="hljs-number">0</span>) &amp;&amp; ((n &amp; (n<span class="hljs-number">-1</span>)) == <span class="hljs-number">0</span>);
+
+<span class="hljs-comment">// Remove last set bit</span>
+n = n &amp; (n<span class="hljs-number">-1</span>);
+</div></code></pre>
+<h3 id="xor-properties"><strong>XOR Properties</strong></h3>
+<pre class="hljs"><code><div>a ^ a = 0
+a ^ 0 = a
+a ^ b ^ b = a
+XOR is associative and commutative
+</div></code></pre>
+<h3 id="useful-tricks"><strong>Useful Tricks</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Swap without temp</span>
+a ^= b ^= a ^= b;
+
+<span class="hljs-comment">// Check if opposite signs</span>
+<span class="hljs-keyword">bool</span> oppSigns = ((a ^ b) &lt; <span class="hljs-number">0</span>);
+
+<span class="hljs-comment">// Multiply/divide by 2</span>
+n &lt;&lt; <span class="hljs-number">1</span>  <span class="hljs-comment">// n * 2</span>
+n &gt;&gt; <span class="hljs-number">1</span>  <span class="hljs-comment">// n / 2</span>
+
+<span class="hljs-comment">// Check odd/even</span>
+<span class="hljs-keyword">if</span>(n &amp; <span class="hljs-number">1</span>) <span class="hljs-comment">// odd</span>
+
+</div></code></pre>
+<hr>
+<h2 id="string-algorithms">STRING ALGORITHMS</h2>
+<h3 id="1-string-functions">1. <strong>STRING FUNCTIONS</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">string</span> s = <span class="hljs-string">"hello"</span>;
+
+s.length() <span class="hljs-keyword">or</span> s.size()     <span class="hljs-comment">// Length</span>
+s.substr(pos, len)         <span class="hljs-comment">// Substring</span>
+s.find(<span class="hljs-string">"ll"</span>)               <span class="hljs-comment">// Find substring (returns pos or string::npos)</span>
+s.rfind(<span class="hljs-string">"l"</span>)               <span class="hljs-comment">// Find from right</span>
+s += <span class="hljs-string">"world"</span>               <span class="hljs-comment">// Concatenate</span>
+s.push_back(<span class="hljs-string">'!'</span>)           <span class="hljs-comment">// Add char at end</span>
+s.pop_back()               <span class="hljs-comment">// Remove last char</span>
+s.erase(pos, len)          <span class="hljs-comment">// Erase substring</span>
+s.insert(pos, <span class="hljs-string">"hi"</span>)        <span class="hljs-comment">// Insert at position</span>
+
+
+<span class="hljs-comment">// Convert</span>
+stoi(s)                    <span class="hljs-comment">// String to int</span>
+stoll(s)                   <span class="hljs-comment">// String to long long</span>
+to_string(n)               <span class="hljs-comment">// Number to string</span>
+
+
+<span class="hljs-comment">// Character checks</span>
+<span class="hljs-built_in">isalpha</span>(c), <span class="hljs-built_in">isdigit</span>(c), <span class="hljs-built_in">islower</span>(c), <span class="hljs-built_in">isupper</span>(c)
+<span class="hljs-built_in">tolower</span>(c), <span class="hljs-built_in">toupper</span>(c)
+
+</div></code></pre>
+<h3 id="2-palindrome-check">2. <strong>PALINDROME CHECK</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isPalindrome</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s)</span> </span>{
+    <span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>, r = s.length()<span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">while</span>(l &lt; r) {
+        <span class="hljs-keyword">if</span>(s[l++] != s[r--]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+</div></code></pre>
+<h3 id="3-anagram-check">3. <strong>ANAGRAM CHECK</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isAnagram</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s1, <span class="hljs-built_in">string</span> s2)</span> </span>{
+    sort(s1.begin(), s1.end());
+    sort(s2.begin(), s2.end());
+    <span class="hljs-keyword">return</span> s1 == s2;
+}
+
+</div></code></pre>
+<h3 id="4-frequency-map">4. <strong>FREQUENCY MAP</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt; freq;
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">char</span> c : s) freq[c]++;
+
+</div></code></pre>
+<hr>
+<hr>
+<h2 id="quick-tips--tricks">QUICK TIPS &amp; TRICKS</h2>
+<h3 id="inputoutput"><strong>Input/Output</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Read until EOF</span>
+<span class="hljs-keyword">int</span> x;
+<span class="hljs-keyword">while</span>(<span class="hljs-built_in">cin</span> &gt;&gt; x) { }
+
+<span class="hljs-comment">// Read line</span>
+<span class="hljs-built_in">string</span> line;
+getline(<span class="hljs-built_in">cin</span>, line);
+
+<span class="hljs-comment">// Precision</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="hljs-number">10</span>) &lt;&lt; ans;
+
+</div></code></pre>
+<h3 id="debugging-tricks"><strong>Debugging Tricks</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> debug(x) cerr &lt;&lt; #x &lt;&lt; <span class="hljs-meta-string">" = "</span> &lt;&lt; x &lt;&lt; endl;</span>
+debug(variable);
+
+<span class="hljs-comment">// Print vector</span>
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x : v) <span class="hljs-built_in">cerr</span> &lt;&lt; x &lt;&lt; <span class="hljs-string">" "</span>;
+<span class="hljs-built_in">cerr</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+</div></code></pre>
+<h3 id="constants"><strong>Constants</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">1e9</span>;
+<span class="hljs-keyword">const</span> ll LLINF = <span class="hljs-number">1e18</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> EPS = <span class="hljs-number">1e-9</span>;
+
+</div></code></pre>
+<h1 id=""></h1>
+<h1 id=""></h1>
+<h1 id="extra">Extra</h1>
+<h2 id="1-stl-shortcuts--utilities">1. STL Shortcuts &amp; Utilities</h2>
+<h3 id="issorted--issorteduntil"><code>is_sorted</code> / <code>is_sorted_until</code></h3>
+<p>Check if a vector is already sorted to avoid unnecessary sorting.</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">4</span>};
+
+<span class="hljs-comment">// Check if sorted</span>
+<span class="hljs-keyword">if</span>(is_sorted(v.begin(), v.end()))
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Already sorted\n"</span>;
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Not sorted\n"</span>;
+
+<span class="hljs-comment">// Find first unsorted element</span>
+<span class="hljs-keyword">auto</span> it = is_sorted_until(v.begin(), v.end());
+<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"First unsorted value: "</span> &lt;&lt; *it &lt;&lt; <span class="hljs-string">"\n"</span>;
+</div></code></pre>
+<h3 id="anyof-allof-noneof"><code>any_of</code>, <code>all_of</code>, <code>none_of</code></h3>
+<p>Check conditions on ranges in a single line.</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+
+<span class="hljs-keyword">if</span>(any_of(v.begin(), v.end(), [](<span class="hljs-keyword">int</span> x){ <span class="hljs-keyword">return</span> x &lt; <span class="hljs-number">0</span>; }))
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Some negatives\n"</span>;
+
+<span class="hljs-keyword">if</span>(all_of(v.begin(), v.end(), [](<span class="hljs-keyword">int</span> x){ <span class="hljs-keyword">return</span> x &gt; <span class="hljs-number">0</span>; }))
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"All positive\n"</span>;
+
+<span class="hljs-keyword">if</span>(none_of(v.begin(), v.end(), [](<span class="hljs-keyword">int</span> x){ <span class="hljs-keyword">return</span> x == <span class="hljs-number">0</span>; }))
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"No zeros\n"</span>;
+</div></code></pre>
+<h3 id="clamp"><code>clamp</code></h3>
+<p>Restrict a value to a range [low, high].</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> val = <span class="hljs-number">120</span>;
+<span class="hljs-keyword">int</span> x = clamp(val, <span class="hljs-number">0</span>, <span class="hljs-number">100</span>); <span class="hljs-comment">// x = 100</span>
+</div></code></pre>
+<h3 id="iota"><code>iota</code></h3>
+<p>Fill a vector with consecutive numbers.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">v</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;
+iota(v.begin(), v.end(), <span class="hljs-number">1</span>); <span class="hljs-comment">// {1,2,3,...,10}</span>
+</div></code></pre>
+<h3 id="rotate"><code>rotate</code></h3>
+<p>Rotate a range efficiently.</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+rotate(v.begin(), v.begin()+<span class="hljs-number">2</span>, v.end()); <span class="hljs-comment">// {3,4,5,1,2}</span>
+</div></code></pre>
+<h3 id="partialsort--nthelement"><code>partial_sort</code> / <code>nth_element</code></h3>
+<p>Get k-th smallest/largest element without full sort.</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v = {<span class="hljs-number">7</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span>,<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>};
+nth_element(v.begin(), v.begin()+<span class="hljs-number">3</span>, v.end());
+<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"4th smallest: "</span> &lt;&lt; v[<span class="hljs-number">3</span>] &lt;&lt; <span class="hljs-string">"\n"</span>;
+partial_sort(v.begin(), v.begin()+<span class="hljs-number">4</span>, v.end()); <span class="hljs-comment">// Sort first 4 smallest elements only</span>
+</div></code></pre>
+<h2 id="2-bit-manipulation--masks">2. Bit Manipulation &amp; Masks</h2>
+<h3 id="bitset"><code>bitset</code></h3>
+<p>Fast operations on bits.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-built_in">bitset</span>&lt;8&gt; <span class="hljs-title">b</span><span class="hljs-params">(<span class="hljs-string">"10101010"</span>)</span></span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; b.count() &lt;&lt; <span class="hljs-string">"\n"</span>;
+b.flip(<span class="hljs-number">0</span>);
+b.<span class="hljs-built_in">set</span>();
+b.reset();
+</div></code></pre>
+<h3 id="iterate-all-subsets-of-a-bitmask">Iterate all subsets of a bitmask</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> mask = <span class="hljs-number">0b111</span>;
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> sub = mask; sub; sub = (sub<span class="hljs-number">-1</span>) &amp; mask) {
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">bitset</span>&lt;3&gt;(sub) &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</div></code></pre>
+<h3 id="builtin-shortcuts"><code>__builtin</code> shortcuts</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> x = <span class="hljs-number">40</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; __builtin_popcount(x) &lt;&lt; <span class="hljs-string">"\n"</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; __builtin_ctz(x) &lt;&lt; <span class="hljs-string">"\n"</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; __builtin_clz(x) &lt;&lt; <span class="hljs-string">"\n"</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; __builtin_parity(x) &lt;&lt; <span class="hljs-string">"\n"</span>;
+</div></code></pre>
+<h2 id="3-pairs--tuples">3. Pairs &amp; Tuples</h2>
+<h3 id="tie-for-unpacking-pairs"><code>tie</code> for unpacking pairs</h3>
+<pre class="hljs"><code><div>pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt; p = {<span class="hljs-number">5</span>,<span class="hljs-number">10</span>};
+<span class="hljs-keyword">int</span> a,b;
+tie(a,b) = p; <span class="hljs-comment">// a=5, b=10</span>
+</div></code></pre>
+<h3 id="tuple-auto-lexicographical-comparison">Tuple auto-lexicographical comparison</h3>
+<pre class="hljs"><code><div>tuple&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt; t1={<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>}, t2={<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>};
+<span class="hljs-keyword">if</span>(t1 &lt; t2) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"t1 comes first\n"</span>;
+</div></code></pre>
+<h2 id="4-math--utility-tricks">4. Math / Utility Tricks</h2>
+<h3 id="fast-ceil-of-integer-division">Fast ceil of integer division</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> a=<span class="hljs-number">7</span>, b=<span class="hljs-number">3</span>;
+<span class="hljs-keyword">int</span> res = (a+b<span class="hljs-number">-1</span>)/b; <span class="hljs-comment">// ceil(a/b) = 3</span>
+</div></code></pre>
+<h3 id="multiple-min--max">Multiple min / max</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> m = min({a,b,c,d});
+<span class="hljs-keyword">int</span> M = max({a,b,c,d});
+</div></code></pre>
+<h3 id="sign-of-number">Sign of number</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> sign = (x &gt; <span class="hljs-number">0</span>) - (x &lt; <span class="hljs-number">0</span>); <span class="hljs-comment">// 1,0,-1</span>
+</div></code></pre>
+<h2 id="5-vector--stl-hacks">5. Vector / STL Hacks</h2>
+<h3 id="erase-remove-idiom">Erase-remove idiom</h3>
+<p>Remove elements from a vector efficiently.</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>};
+v.erase(remove(v.begin(), v.end(), <span class="hljs-number">2</span>), v.end());
+</div></code></pre>
+<h3 id="distance-%E2%80%93-iterator-%E2%86%92-index"><code>distance</code> – iterator → index</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">auto</span> it = find(v.begin(), v.end(), <span class="hljs-number">4</span>);
+<span class="hljs-keyword">int</span> idx = distance(v.begin(), it);
+</div></code></pre>
+<h3 id="swap-for-pairs-arrays-tuples"><code>swap</code> for pairs, arrays, tuples</h3>
+<pre class="hljs"><code><div>pair&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt; p1={<span class="hljs-number">1</span>,<span class="hljs-number">2</span>}, p2={<span class="hljs-number">3</span>,<span class="hljs-number">4</span>};
+swap(p1,p2); <span class="hljs-comment">// p1={3,4}, p2={1,2}</span>
+</div></code></pre>
+<h3 id="lambda-for-small-utilities">Lambda for small utilities</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">auto</span> sq = [](<span class="hljs-keyword">int</span> x){ <span class="hljs-keyword">return</span> x*x; };
+<span class="hljs-built_in">cout</span> &lt;&lt; sq(<span class="hljs-number">5</span>); <span class="hljs-comment">// 25</span>
+</div></code></pre>
+
+</body>
+</html>
